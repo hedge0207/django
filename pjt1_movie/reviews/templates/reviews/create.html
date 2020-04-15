@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load bootstrap4 %}
+{% block body %}
+    <h1>새 글 쓰기</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary">작성하기</button>
+        <a href="{% url 'reviews:index' %}"><button type="button" class="btn btn-secondary">취소하기</button></a>
+    </form>
+{% endblock%}

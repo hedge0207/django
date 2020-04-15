@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1>{{ user.pk }}번 회원 : {{ user }}님의 페이지</h1>
+    <p>성함 : {{user.last_name}}{{user.first_name}}</p>
+    <p>email : {{user.email}}</p>
+    <hr>
+    <a href="{% url 'accounts:update' %}"><button class="btn btn-info">정보 수정</button></a>
+    <a href="{% url 'accounts:delete' %}"><button class="btn btn-danger">회원 탈퇴</button></a>
+{% endblock %}

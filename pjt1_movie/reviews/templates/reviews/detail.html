@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>{{review.title}}</h1>
+    <h2>{{review.movie_title}}</h2>
+    <hr>
+    <p>{{review.content}}</p>
+    <hr>
+    <p>{{review.created_at}}</p>
+    <p>{{review.updated_at}}</p>
+    <a href="{% url 'reviews:delete' review.pk %}"><button>삭제하기</button></a>
+    <a href="{% url 'reviews:update' review.pk %}"><button>수정하기</button></a>
+{% endblock %}

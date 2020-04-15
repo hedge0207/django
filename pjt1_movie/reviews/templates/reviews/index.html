@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">movie</th>
+          <th scope="col">title</th>
+          <th scope="col">created_at</th>
+          <th scope="col">created_by</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for review in reviews %}
+        <tr>
+          <th scope="row">{{review.pk}}</th>
+          <td>{{review.movie_title}}</td>
+          <td><a href="{% url 'reviews:detail' review.pk %}">{{review.title}}</a></td>
+          <td>{{review.created_at}}</td>
+          <td>{{review.nickaname}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock%}

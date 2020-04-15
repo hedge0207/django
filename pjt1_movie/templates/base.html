@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+  <title>Moview</title>
+  {% block css %}
+  {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'reviews:index' %}">Moview</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reviews:create' %}">new</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:detail' %}">profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:logout' %}">log out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:signin' %}">sign in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:signup' %}">sign up</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  {% block body %}
+  {% endblock %}
+  <script src="{% static 'bootstrap/bootsrap.js' %}"></script>
+</body>
+</html>
+
