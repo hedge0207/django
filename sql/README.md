@@ -157,21 +157,74 @@ count(*)
 sqlite> select name from family where name like '홍%' and address='대전'
 name
 "홍민준"
+
+--나이가 어린 사람 3명(오름차순)
+sqlite> select age,name from family order by age asc limit 3;
+age,name
+18,"최민준"
+22,"홍민준"
+24,"홍지유"
+
+--나이가 많은 사람 3명(내림차순)
+sqlite> select age,name from family order by age desc limit 3;
+age,name
+78,"홍길동"
+71,"김옥연"
+48,"홍시우"  --동갑인 최하윤이 아닌 홍시우가 들어간 이유(db등록순?)
+
+--나이가 내림차순 순으로 3번째 있는 사람
+sqlite> select name from family order by age desc limit 1 offset 2;
+name
+"홍시우"
 ```
 
 
 
+- gruop by
+
+```sql
+--지역별 인원수
+select address, count(address) from family group by address
+sqlite> select address, count(address) from family group by address;
+address,count(address)
+"광주",3
+"대구",2
+"대전",4
+"부산",1
+"양산",1
+"창원",1
+```
 
 
 
+- review
+  - 처음 데이터 추가시에 `attempt to write a readonly database` 에러 발생, 이후 터미널 종료 후 다시 실행해보니 정상적으로 추가 되었음
 
+  - offset, gruop by 정리
 
+  - 나이가 많은 사람 3명(내림차순)을 했을 때 동갑인 최하윤도 있는데 홍시우가 들어간 이유
 
+    - 등록순?,  id순?
 
+    ```sql
+    --데이터를 아래와 같이(홍시우와 최하윤의 id를 바꿈) 바꾼 후 확인
+    1,홍길동,78,부산,남성
+    3,홍시우,48,대구,남성
+    2,최하윤,48,대구,여성
+    4,홍민준,20,대전,남성
+    5,홍지유,24,광주,여성
+    6,김하준,27,광주,남성
+    7,김옥연,71,광주,여성
+    8,최시우,44,대전,남성
+    9,박하은,42,대전,여성
+    10,최민준,18,대전,남성
+    
+    --확인 결과 이번에는 홍시우가 아닌 최하윤이 들어가게 됨.id값이 더 큰 것이 들어가는 것으로 보임
+    sqlite> select age,name from family order by age desc limit 3;
+    age,name
+    78,"홍길동"
+    71,"김옥연"
+    48,"최하윤"
+    ```
 
-
-
-
-
-
-
+    
