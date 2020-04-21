@@ -200,12 +200,16 @@ address,count(address)
 - review
   - 처음 데이터 추가시에 `attempt to write a readonly database` 에러 발생, 이후 터미널 종료 후 다시 실행해보니 정상적으로 추가 되었음
 
+    - c9의 오류로 보임
+
   - offset, gruop by 정리
 
+    - 정리 완료
+
   - 나이가 많은 사람 3명(내림차순)을 했을 때 동갑인 최하윤도 있는데 홍시우가 들어간 이유
-
+  
     - 등록순?,  id순?
-
+  
     ```sql
     --데이터를 아래와 같이(홍시우와 최하윤의 id를 바꿈) 바꾼 후 확인
     1,홍길동,78,부산,남성
@@ -222,9 +226,9 @@ address,count(address)
     --확인 결과 이번에는 홍시우가 아닌 최하윤이 들어가게 됨.id값이 더 큰 것이 들어가는 것으로 보임
     sqlite> select age,name from family order by age desc limit 3;
     age,name
-    78,"홍길동"
+  78,"홍길동"
     71,"김옥연"
     48,"최하윤"
     ```
-
+  
     
