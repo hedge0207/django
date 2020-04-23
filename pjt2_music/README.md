@@ -120,3 +120,11 @@
   ```
 
   
+
+- @login_required를 쓸 때 settings.py에 설정된 경로대로 만들지 않았다면 settings.py에 아래의 문구를 추가해야 한다.
+
+  ```python
+  LOGIN_URL = '/앱이름/url이름/'
+  ```
+
+  
