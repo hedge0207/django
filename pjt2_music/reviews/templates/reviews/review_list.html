@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>리뷰 목록</h1>
+{% for review in reviews %}
+    <a href="{% url 'reviews:detail' review.pk %}"><h3>{{ review.title }}</h3></a>
+    <p>{{ review.music_title }} 감상평</p>
+    <br>
+{% endfor %}
+{% endblock %}

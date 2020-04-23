@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body%}
+<h1>{{review.title}}</h1>
+<h2>{{review.music_title}}</h2>
+<p>{{review.content}}</p>
+<p>최근수정:{{review.updated_at}}</p>
+<p>작성시점:{{review.created_at}}</p>
+<p>작성자:{{review.user.username}}</p>
+
+<a href="{% url 'reviews:review_list' %}"><button>뒤로 가기</button></a>
+
+{% if request.user == review.user %}
+<form action="{% url 'reviews:delete' review.pk %}" method=POST>
+    {% csrf_token %}
+    <button>삭제하기</button>
+</form>
+<a href="{% url 'reviews:update' review.pk %}"><button>수정하기</button></a>
+{% endif %}
+
+
+
+
+<h4>댓글</h4>
+{% if user.is_authenticated %}
+<form action="{% url 'reviews:comment_create' review.pk %}" method=POST>
+    {% csrf_token %}
+    <p>{{form.content}}</p>
+    <button>작성하기</button>
+</form>
+{% endif %}
+
+{% for comment in comments %}
+    <p>{{comment.content}}</p>
+    <p>{{comment.user.username}}</p>
+    <p>{{comment.updated_at}}</p>
+    <p>{{comment.updated_at}}</p>
+    {% if comment.user == request.user %}
+    <form action="{% url 'reviews:comment_delete' review.pk comment.pk %}">
+        <button>삭제하기</button>
+    </form>
+    {% endif %}
+    <hr>
+{% endfor %}
+
+{% endblock %}
