@@ -1,0 +1,7 @@
+<h1>X VS Y</h1>
+<a href="{% url 'vote:create' %}">새로 만들기</a>
+{%for vote in votes %}
+<a href="{% url 'vote:detail' vote.pk %}"><h3>{{vote.title}}</h3></a>
+<p>{{vote.option1}}VS{{vote.option2}}</p>
+<hr>
+{% endfor %}
