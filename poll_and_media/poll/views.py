@@ -12,7 +12,7 @@ def index(request):
 
 def create(request):
     if request.method=="POST":
-        form=VoteForm(request.POST)
+        form=VoteForm(request.POST, request.FILES)
         if form.is_valid():
             vote = form.save()
             return redirect('vote:detail', vote.pk)
@@ -28,9 +28,9 @@ def detail(request,vote_pk):
     comments = Comment.objects.all()
     form = CommentForm()
     cnt = comments.count()
+    red = comments.filter(pick=2).count()
+    blue = cnt-red
     if cnt:
-        red = comments.filter(pick=2).count()
-        blue = cnt-red
         rred = 100-int(blue/cnt*100)
         rblue = 100-rred
     else:
