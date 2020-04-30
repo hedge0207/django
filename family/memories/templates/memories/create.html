@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% load bootstrap4 %}
+<h1>새 기록 남기기</h1>
+<form action="" method=POST enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button>기록하기</button>
+</form>
+<a href="{% url 'memories:index' %}"><button>뒤로가기</button></a>
+
+{% endblock %}
