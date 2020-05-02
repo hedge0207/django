@@ -1,10 +1,55 @@
 {% extends 'base.html' %}
 
+{% load bootstrap4 %}
 {% block body %}
 <h1>{{article.title}}</h1>
-<img src="{{ article.image.url }}">
+{% if article.image != "" %}
+  <img src="{{ article.image.url }}">
+{% endif %}
 <p>{{article.content}}</p>
-<p>{{article.user}}</p>
+<a href="{% url 'accounts:profile' article.user.pk%}"><p>{{article.user}}</p></a>
 <p>{{article.created_at}}</p>
 <p>{{article.updated_at}}</p>
+<hr>
+
+{% if request.user in article_like_users %}
+        <a href="{% url 'memories:like' article.pk %}">
+            좋아요 취소
+        </a>
+        {% else %}
+        <a href="{% url 'memories:like' article.pk %}">
+            좋아요
+        </a>
+        {% endif %}
+        <p>{{ article_like_users|length }}명이 좋아합니다.</p>
+
+
+{% if request.user == article.user %}
+  <form action="{% url 'memories:delete' article.pk %}" method=POST>
+      {% csrf_token %}
+      <button>삭제하기</button>
+  </form>
+  <form action="{% url 'memories:update' article.pk %}">
+      <button>수정하기</button>
+  </form>
+{% endif %}
+<a href="{% url 'memories:index' %}"><button>뒤로가기</button></a>
+<hr>
+
+<h3>댓글</h3>
+<form action="{% url 'memories:comment_create' article.pk %}" method=POST>
+    {% csrf_token %}
+    {% bootstrap_form comment_form %}
+    <button>댓글 쓰기</button>
+</form>
+{% for comment in comments %}
+  <p>{{comment.user}}</p>
+  <p>{{comment.content}}</p>
+  <p>{{comment.created_at}}</p>
+  <form action="{% url 'memories:comment_delete' article.pk comment.pk %}" method=POST>
+      {% csrf_token %}
+      <button>삭제하기</button>
+  </form>
+  <hr>
+{% endfor %}
 {% endblock %}

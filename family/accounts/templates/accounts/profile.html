@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>{{user.username}}님의 프로필</h1>
+<p>부:{{user.father}}</p>
+<p>모:{{user.mather}}</p>
+{% if user.child != '없음' %}
+<p>자식{{user.child}}</p>
+{% endif %}
+{% if request.user == user %}
+<form action="{% url 'accounts:user_delete' user.pk %}" method=POST>
+    {% csrf_token %}
+    <button>탈퇴하기</button>
+</form>
+<a href="{% url 'accounts:user_update' %}"><button>수정하기</button></a>
+{% endif %}
+<a href="{% url 'memories:index' %}"><button>뒤로 가기</button></a>
+{% endblock %}

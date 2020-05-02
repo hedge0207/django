@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% load bootstrap4 %}
+{% if request.resolver_match.url_name == 'create' %}
+<h1>새글쓰기</h1>
+<form action="" method=POST enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button>글쓰기</button>
+</form>
+{% else %}
+<h1>수정하기</h1>
+<form action="" method=POST enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button>수정하기</button>
+</form>
+{% endif %}
+<a href="{% url 'memories:index' %}"><button>뒤로가기</button></a>
+{% endblock %}

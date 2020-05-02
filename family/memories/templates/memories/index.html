@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>기억들</h1>
+<h1>게시글</h1>
 {% for article in articles %}
-<h3>{{article.title}}</h3>
-<p>{{article.user}}</p>
+<a href="{% url 'memories:detail' article.pk %}"><h3>{{article.title}}</h3></a>
+<a href="{% url 'accounts:profile' article.user.pk %}"><p>작성자: {{article.user}}</p></a>
 <p>{{article.content|truncatechars:30}}</p>
 <p>{{article.created_at|date:'Y년 m월 d일 (D) A h:i'}}</p>
+<hr>
 {% endfor %}
 {% endblock %}
