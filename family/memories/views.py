@@ -76,6 +76,7 @@ def comment_delete(request,article_pk,comment_pk):
     comment.delete()
     return redirect('memories:detail', article_pk)
 
+@login_required
 def like(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     if article.like_users.filter(id=request.user.pk).exists():
@@ -83,4 +84,5 @@ def like(request, article_pk):
     else:
         article.like_users.add(request.user)
     return redirect('memories:detail', article.pk)
+
 

@@ -12,16 +12,13 @@
 <p>{{article.updated_at}}</p>
 <hr>
 
-{% if request.user in article_like_users %}
-        <a href="{% url 'memories:like' article.pk %}">
-            좋아요 취소
-        </a>
-        {% else %}
-        <a href="{% url 'memories:like' article.pk %}">
-            좋아요
-        </a>
-        {% endif %}
-        <p>{{ article_like_users|length }}명이 좋아합니다.</p>
+{% if request.user in article.like_users.all %}
+<a href="{% url 'memories:like' article.pk %}"><i class="fas fa-heart" style='color:red'></i></a>
+{% else %}
+<a href="{% url 'memories:like' article.pk %}"><i class="far fa-heart" style='color:red'></i></a>
+{% endif %}
+<p>{{ article.like_users.all|length }}명이 좋아합니다.</p>
+
 
 
 {% if request.user == article.user %}
