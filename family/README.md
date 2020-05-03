@@ -143,6 +143,7 @@
 # 추가해야 할 기능
 
 - login_required
+- message
 
 
 

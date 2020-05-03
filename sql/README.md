@@ -184,7 +184,6 @@ name
 
 ```sql
 --지역별 인원수
-select address, count(address) from family group by address
 sqlite> select address, count(address) from family group by address;
 address,count(address)
 "광주",3
