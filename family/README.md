@@ -144,6 +144,7 @@
 
 - login_required
 - message
+- 투표기능 구현하기
 
 
 
